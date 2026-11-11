@@ -11,40 +11,40 @@ import { fileURLToPath } from 'url';
  * It is needed in projects that use Yarn PnP or are set up within a monorepo.
  */
 function getAbsolutePath(value: string): any {
-	return dirname(fileURLToPath(import.meta.resolve(`${value}/package.json`)));
+  return dirname(fileURLToPath(import.meta.resolve(`${value}/package.json`)));
 }
 
 const config: StorybookConfig = {
-	stories: ['../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
-	addons: [getAbsolutePath('@storybook/addon-a11y'), getAbsolutePath('@storybook/addon-docs'), getAbsolutePath('@storybook/addon-mcp'), getAbsolutePath('@storybook/addon-vitest')],
-	framework: {
-		name: '@storybook/angular-vite',
-		options: {},
-	},
-	logLevel: process.env['CI'] ? 'error' : 'info',
-	staticDirs: ['./public'],
-	viteFinal: async (config) => {
-		const userConfig: UserConfig = {
-			// Mirror the CSS pipeline the published package ships (sass + autoprefixer, see build.js).
-			css: {
-				transformer: 'postcss',
-				postcss: {
-					plugins: [autoprefixer()],
-				},
-			},
-			build: {
-				cssMinify: 'esbuild',
-				rolldownOptions: {
-					output: {
-						chunkFileNames: '[hash].js',
-					},
-				},
-			},
-			resolve: {
-				tsconfigPaths: true,
-			},
-		};
-		return mergeConfig(config, userConfig);
-	},
+  stories: ['../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  addons: [getAbsolutePath('@storybook/addon-a11y'), getAbsolutePath('@storybook/addon-docs'), getAbsolutePath('@storybook/addon-mcp'), getAbsolutePath('@storybook/addon-vitest')],
+  framework: {
+    name: getAbsolutePath('@storybook/angular-vite'),
+    options: {},
+  },
+  logLevel: process.env['CI'] ? 'error' : 'info',
+  staticDirs: ['./public'],
+  viteFinal: async (config) => {
+    const userConfig: UserConfig = {
+      // Mirror the CSS pipeline the published package ships (sass + autoprefixer, see build.js).
+      css: {
+        transformer: 'postcss',
+        postcss: {
+          plugins: [autoprefixer()],
+        },
+      },
+      build: {
+        cssMinify: 'esbuild',
+        rolldownOptions: {
+          output: {
+            chunkFileNames: '[hash].js',
+          },
+        },
+      },
+      resolve: {
+        tsconfigPaths: true,
+      },
+    };
+    return mergeConfig(config, userConfig);
+  },
 };
 export default config;

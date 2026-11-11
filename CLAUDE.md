@@ -98,3 +98,15 @@ Attentes détaillées côté relecture : [contributing.md](contributing.md#pull-
 - `.github/skills/lucca-front/` — skill agent du Design System, écrite à la main, que les projets consommateurs installent avec APM : un pointeur vers la documentation livrée dans `@lucca-front/ng` (`node_modules/@lucca-front/ng/llms.txt`). Cette documentation est générée depuis `scripts/generate-skills/` dans `.github/skills/_lucca-front/llms/`, et régénérée par le hook pre-commit à chaque commit qui touche le code (`npm run skills:update`) (avec les métadonnées du générateur dans `.github/skills/_lucca-front/`), puis copiée dans le package par `scripts/llms-skill`. Les autres dossiers de `.github/skills/` sont écrits à la main.
 - La référence du Design System vit sur zeroheight (Prisme).
 - **Scripts de skills** — tout script embarqué ou appelé par un skill est écrit en **Node** (JS/TS), en **C#/.NET** ou en **shell** — jamais en Python ou autre langage, pour garder une cohérence globale entre les dépôts.
+
+<!-- BEGIN:storybook-skills -->
+<!-- Storybook updates this section on upgrade. Remove both markers to keep your own edits. -->
+
+## Storybook skills
+
+For each of these tasks, invoke its Storybook skill first, before you edit any file, and follow it:
+
+- `ui-workflow`: you create, change, or delete a component, story, style, theme, or design token, or otherwise change how the UI looks; you run or fix story tests; or the user asks to see components or stories. It looks up the components to reuse, updates your stories, runs the tests, and publishes a review of the results.
+- `component-docs`: you look for an existing component to reuse instead of building a new one, or the user asks about a component's props, API, or usage. It lists the project's components with their props and usage examples.
+
+<!-- END:storybook-skills -->
