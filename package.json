@@ -153,8 +153,8 @@
   },
   "overrides": {
     "@storybook/addon-mcp": {
-      "storybook": "~10.5.3",
-      "@storybook/addon-vitest": "~10.5.3",
+      "storybook": "^11.0.0-beta.2",
+      "@storybook/addon-vitest": "^11.0.0-beta.2",
       "valibot": "^1.4.2"
     },
     "@storybook/angular-vite": {
